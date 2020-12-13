@@ -79,41 +79,55 @@
 
 	<script type="module">
 		import * as THREE from '/threetest/build/three.module.js';
-		import Stats from '/threetest/examples/jsm/libs/stats.module.js';
-		import {
-			PointerLockControls
-		} from '/threetest/examples/jsm/controls/PointerLockControls.js';
-		import {
-			GUI
-		} from '/threetest/examples/jsm/libs/dat.gui.module.js';
-		import {
-			Water
-		} from '/threetest/examples/jsm/objects/Water.js';
+			import Stats from '/threetest/examples/jsm/libs/stats.module.js';
+			import {
+				PointerLockControls
+			} from '/threetest/examples/jsm/controls/PointerLockControls.js';
+			import {
+				GUI
+			} from '/threetest/examples/jsm/libs/dat.gui.module.js';
+			import {
+				Water
+			} from '/threetest/examples/jsm/objects/Water.js';
 
-		import {
-			GLTFLoader
-		} from '/threetest/examples/jsm/loaders/GLTFLoader.js';
-		import {
-			RGBELoader
-		} from '/threetest/examples/jsm/loaders/RGBELoader.js';
-		import {
-			RoughnessMipmapper
-		} from '/threetest/examples/jsm/utils/RoughnessMipmapper.js';
-		import {
-			Sky
-		} from '/threetest/examples/jsm/objects/Sky.js';
+			import {
+				GLTFLoader
+			} from '/threetest/examples/jsm/loaders/GLTFLoader.js';
+			import {
+				RGBELoader
+			} from '/threetest/examples/jsm/loaders/RGBELoader.js';
+			import {
+				RoughnessMipmapper
+			} from '/threetest/examples/jsm/utils/RoughnessMipmapper.js';
+			import {
+				Sky
+			} from '/threetest/examples/jsm/objects/Sky.js';
 
-		// import * as THREE from '/threetest/build/three.module.js';
-		// import Stats from '/threetest/examples/jsm/libs/stats.module.js';
+		// import * as THREE from '../build/three.module.js';
+		// import Stats from './examples/jsm/libs/stats.module.js';
 		// import {
 		// 	PointerLockControls
-		// } from '/threetest/examples/jsm/controls/PointerLockControls.js';
+		// } from './examples/jsm/controls/PointerLockControls.js';
 		// import {
 		// 	GUI
-		// } from '/threetest/examples/jsm/libs/dat.gui.module.js';
-		// 	import {
-		// 		Water
-		// 	} from '/threetest/examples/jsm/objects/Water.js';
+		// } from './examples/jsm/libs/dat.gui.module.js';
+		// import {
+		// 	Water
+		// } from './examples/jsm/objects/Water.js';
+		//
+		// import {
+		// 	GLTFLoader
+		// } from './examples/jsm/loaders/GLTFLoader.js';
+		// import {
+		// 	RGBELoader
+		// } from './examples/jsm/loaders/RGBELoader.js';
+		// import {
+		// 	RoughnessMipmapper
+		// } from './examples/jsm/utils/RoughnessMipmapper.js';
+		// import {
+		// 	Sky
+		// } from './examples/jsm/objects/Sky.js';
+
 
 
 		/*
@@ -130,7 +144,7 @@
 		*/
 
 		//	// PRESENTATION
-		const speederBoi = 350
+		const speederBoi = 300
 		let presentation = true
 
 		// // // WORKING
@@ -457,6 +471,14 @@
 
 			gardenBox()
 
+			const geometry2 = new THREE.SphereBufferGeometry(30, 10, 10);
+			const material2 = new THREE.MeshBasicMaterial({
+				color: 'white'
+			});
+		 bodySphere = new THREE.Mesh(geometry2, material2);
+
+			bodySphere.position.copy(controls.getObject().position)
+			camera.add(bodySphere);
 
 			/////////////////////////////// GLTF ///////////////////////////////////
 			//
@@ -1140,7 +1162,7 @@
 			}
 
 			prevTime = performanceNow;
-			// bodySphere.position.set(0, -10, 0);
+			bodySphere.position.set(0, 0, 0);
 
 			const scale = (num, in_min, in_max, out_min, out_max) => {
 				return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
@@ -1214,6 +1236,8 @@
 					element.rotation.z += 0.0001
 				}
 			});
+
+
 
 			renderer.render(scene, camera);
 
